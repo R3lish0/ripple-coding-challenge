@@ -1,0 +1,52 @@
+.task-detail-container {
+  padding: 20px;
+  position: relative;
+}
+
+.task-card {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-section {
+  h3 {
+    margin: 0 0 4px 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px;
+}
+
+mat-card-subtitle {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+mat-card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
