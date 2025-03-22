@@ -163,158 +163,7 @@ import { Task } from '../../../../models/task.model';
   `]
 })
 export class TaskListComponent implements OnInit {
-  tasks: Task[] = [
-    {
-      id: 1,
-      title: 'Complete Project Proposal',
-      description: 'Draft and finalize the Q2 project proposal',
-      dueDate: new Date('2024-04-15'),
-      priority: 'High',
-      status: 'InProgress',
-      createdAt: new Date('2024-03-01'),
-      updatedAt: new Date('2024-03-10')
-    },
-    {
-      id: 2,
-      title: 'Review Code Changes',
-      description: 'Review pull requests for the new feature',
-      dueDate: new Date('2024-03-25'),
-      priority: 'Medium',
-      status: 'Pending',
-      createdAt: new Date('2024-03-15'),
-      updatedAt: new Date('2024-03-15')
-    },
-    {
-      id: 3,
-      title: 'Update Documentation',
-      description: 'Update API documentation with new endpoints',
-      dueDate: new Date('2024-03-30'),
-      priority: 'Low',
-      status: 'Completed',
-      createdAt: new Date('2024-03-10'),
-      updatedAt: new Date('2024-03-20')
-    },
-    {
-      id: 4,
-      title: 'Client Meeting Preparation',
-      description: 'Prepare presentation for quarterly client meeting',
-      dueDate: new Date('2024-04-01'),
-      priority: 'High',
-      status: 'Pending',
-      createdAt: new Date('2024-03-18'),
-      updatedAt: new Date('2024-03-18')
-    },
-    {
-      id: 5,
-      title: 'Database Optimization',
-      description: 'Optimize database queries for better performance',
-      dueDate: new Date('2024-03-28'),
-      priority: 'Medium',
-      status: 'InProgress',
-      createdAt: new Date('2024-03-15'),
-      updatedAt: new Date('2024-03-19')
-    },
-    {
-      id: 6,
-      title: 'Security Audit',
-      description: 'Conduct security audit of the application',
-      dueDate: new Date('2024-04-10'),
-      priority: 'High',
-      status: 'Pending',
-      createdAt: new Date('2024-03-20'),
-      updatedAt: new Date('2024-03-20')
-    },
-    {
-      id: 7,
-      title: 'User Interface Testing',
-      description: 'Perform UI testing on new components',
-      dueDate: new Date('2024-03-27'),
-      priority: 'Medium',
-      status: 'Completed',
-      createdAt: new Date('2024-03-10'),
-      updatedAt: new Date('2024-03-25')
-    },
-    {
-      id: 8,
-      title: 'Deployment Planning',
-      description: 'Plan the next deployment strategy',
-      dueDate: new Date('2024-04-05'),
-      priority: 'High',
-      status: 'InProgress',
-      createdAt: new Date('2024-03-22'),
-      updatedAt: new Date('2024-03-22')
-    },
-    {
-      id: 9,
-      title: 'Code Refactoring',
-      description: 'Refactor legacy code for better maintainability',
-      dueDate: new Date('2024-04-20'),
-      priority: 'Medium',
-      status: 'Pending',
-      createdAt: new Date('2024-03-25'),
-      updatedAt: new Date('2024-03-25')
-    },
-    {
-      id: 10,
-      title: 'Performance Testing',
-      description: 'Conduct performance testing on new features',
-      dueDate: new Date('2024-04-12'),
-      priority: 'High',
-      status: 'InProgress',
-      createdAt: new Date('2024-03-28'),
-      updatedAt: new Date('2024-03-28')
-    },
-    {
-      id: 11,
-      title: 'Documentation Review',
-      description: 'Review and update technical documentation',
-      dueDate: new Date('2024-04-08'),
-      priority: 'Low',
-      status: 'Pending',
-      createdAt: new Date('2024-03-30'),
-      updatedAt: new Date('2024-03-30')
-    },
-    {
-      id: 12,
-      title: 'Bug Fixing',
-      description: 'Fix critical bugs reported by users',
-      dueDate: new Date('2024-04-02'),
-      priority: 'High',
-      status: 'Completed',
-      createdAt: new Date('2024-03-25'),
-      updatedAt: new Date('2024-03-29')
-    },
-    {
-      id: 13,
-      title: 'Feature Implementation',
-      description: 'Implement new user authentication feature',
-      dueDate: new Date('2024-04-18'),
-      priority: 'Medium',
-      status: 'InProgress',
-      createdAt: new Date('2024-03-28'),
-      updatedAt: new Date('2024-03-28')
-    },
-    {
-      id: 14,
-      title: 'Code Review',
-      description: 'Review code changes from team members',
-      dueDate: new Date('2024-04-05'),
-      priority: 'Medium',
-      status: 'Pending',
-      createdAt: new Date('2024-03-30'),
-      updatedAt: new Date('2024-03-30')
-    },
-    {
-      id: 15,
-      title: 'System Maintenance',
-      description: 'Perform routine system maintenance',
-      dueDate: new Date('2024-04-15'),
-      priority: 'Low',
-      status: 'Completed',
-      createdAt: new Date('2024-03-20'),
-      updatedAt: new Date('2024-03-25')
-    }
-  ];
+  tasks: Task[] = [];
   displayedColumns: string[] = ['title', 'dueDate', 'priority', 'status', 'actions'];
   pageSize = 10;
   currentPage = 0;
@@ -323,7 +172,7 @@ export class TaskListComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.updatePaginatedTasks();
+    this.loadTasks()
   }
 
   updatePaginatedTasks(): void {
@@ -347,8 +196,9 @@ export class TaskListComponent implements OnInit {
 
   deleteTask(id: number): void {
     if (confirm('Are you sure you want to delete this task?')) {
-      this.tasks = this.tasks.filter((ele, index) => index !== id);
-      this.updatePaginatedTasks();
+      this.taskService.deleteTask(id).subscribe(() => {
+        this.loadTasks();
+      });
     }
   }
 

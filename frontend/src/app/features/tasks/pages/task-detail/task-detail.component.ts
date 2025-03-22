@@ -83,18 +83,14 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const taskId = Number(this.route.snapshot.paramMap.get('id'));
-    // TODO: Replace with actual service call to get task details
-    // For now, we'll use mock data from the task list
-    this.task = {
-      id: taskId,
-      title: 'Sample Task',
-      description: 'This is a sample task description',
-      dueDate: new Date(),
-      priority: 'Medium',
-      status: 'InProgress',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
+    this.taskService.getTask(taskId).subscribe({
+      next: (task) => {
+        this.task = task;
+      },
+      error: (error) => {
+        console.error('Error loading task:', error);
+      }
+    });
   }
 
   getPriorityColor(priority: string): string {
