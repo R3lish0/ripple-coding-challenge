@@ -80,7 +80,7 @@ namespace TaskApi.Controllers
             _context.TaskItems.Add(taskItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTaskItem", new { id = taskItem.Id }, taskItem);
+            return CreatedAtAction(nameof("GetTaskItem"), new { id = taskItem.Id }, taskItem);
         }
 
         // DELETE: api/TaskItems/5
