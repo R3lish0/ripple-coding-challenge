@@ -25,10 +25,12 @@ import { MatChipsModule } from '@angular/material/chips';
         <mat-card-header>
           <mat-card-title>{{ task.title }}</mat-card-title>
           <mat-card-subtitle>
-            <mat-chip [color]="getPriorityColor(task.priority)" selected>
+            <mat-chip [ngClass]="getPriorityClass(task.priority)" selected>
+              <mat-icon>{{getPriorityIcon(task.priority)}}</mat-icon>
               {{ task.priority }}
             </mat-chip>
-            <mat-chip [color]="getStatusColor(task.status)" selected>
+            <mat-chip [ngClass]="getStatusClass(task.status)" selected>
+              <mat-icon>{{getStatusIcon(task.status)}}</mat-icon>
               {{ task.status }}
             </mat-chip>
           </mat-card-subtitle>
@@ -93,29 +95,55 @@ export class TaskDetailComponent implements OnInit {
     });
   }
 
-  getPriorityColor(priority: string): string {
+  getPriorityClass(priority: string): string {
     switch (priority.toLowerCase()) {
       case 'high':
-        return 'warn';
+        return 'priority-high';
       case 'medium':
-        return 'accent';
+        return 'priority-medium';
       case 'low':
-        return 'primary';
+        return 'priority-low';
       default:
-        return 'primary';
+        return 'priority-low';
     }
   }
 
-  getStatusColor(status: string): string {
+  getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
       case 'completed':
-        return 'primary';
+        return 'status-completed';
       case 'inprogress':
-        return 'accent';
+        return 'status-inprogress';
       case 'pending':
-        return 'warn';
+        return 'status-pending';
       default:
-        return 'primary';
+        return 'status-completed';
+    }
+  }
+
+  getPriorityIcon(priority: string): string {
+    switch (priority.toLowerCase()) {
+      case 'high':
+        return 'warning';
+      case 'medium':
+        return 'info';
+      case 'low':
+        return 'check_circle';
+      default:
+        return 'check_circle';
+    }
+  }
+
+  getStatusIcon(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'completed':
+        return 'check_circle';
+      case 'inprogress':
+        return 'refresh';
+      case 'pending':
+        return 'schedule';
+      default:
+        return 'check_circle';
     }
   }
 }
