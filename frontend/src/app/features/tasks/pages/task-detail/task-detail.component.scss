@@ -6,6 +6,10 @@
 .task-card {
   max-width: 800px;
   margin: 0 auto;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  box-shadow: none;
 }
 
 .task-info {
@@ -24,6 +28,7 @@
 
   p {
     margin: 0;
+    margin-bottom:10px;
     font-size: 16px;
   }
 }
@@ -33,6 +38,7 @@ mat-card-actions {
   justify-content: flex-end;
   gap: 8px;
   padding: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 mat-card-subtitle {
@@ -48,7 +54,7 @@ mat-card-title {
 }
 
 mat-card {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 mat-chip {

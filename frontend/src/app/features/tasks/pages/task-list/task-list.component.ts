@@ -160,6 +160,43 @@ import { Task } from '../../../../models/task.model';
       background-color: #fff3e0 !important;
       color: #ef6c00 !important;
     }
+
+    @media (max-width: 768px) {
+      .task-list-container {
+        padding: 12px;
+      }
+      .header {
+        margin-bottom: 16px;
+      }
+      .header h1 {
+        font-size: 20px;
+      }
+      table {
+        font-size: 14px;
+      }
+      .mat-mdc-header-cell {
+        padding: 8px;
+      }
+      .mat-mdc-cell {
+        padding: 8px;
+      }
+      mat-chip {
+        height: 28px;
+        width: 28px;
+      }
+      mat-chip mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
+      .fab-button {
+        bottom: 16px;
+        right: 16px;
+      }
+      mat-paginator {
+        margin-top: 12px;
+      }
+    }
   `]
 })
 export class TaskListComponent implements OnInit {
