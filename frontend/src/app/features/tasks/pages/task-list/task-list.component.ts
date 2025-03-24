@@ -81,6 +81,8 @@ import { Task } from '../../../../models/task.model';
       position: relative;
       max-width: 1200px;
       margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
     }
     .header {
       margin-bottom: 24px;
@@ -96,6 +98,8 @@ import { Task } from '../../../../models/task.model';
       background: white;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      table-layout: fixed;
+      overflow-x: auto;
     }
     .mat-mdc-header-cell {
       cursor: pointer;
@@ -109,6 +113,9 @@ import { Task } from '../../../../models/task.model';
       margin-top: 16px;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      width: 100%;
+      background: white;
+      box-sizing: border-box;
     }
     .fab-button {
       position: fixed;
@@ -164,6 +171,8 @@ import { Task } from '../../../../models/task.model';
     @media (max-width: 768px) {
       .task-list-container {
         padding: 12px;
+        width: 100%;
+        box-sizing: border-box;
       }
       .header {
         margin-bottom: 16px;
@@ -173,6 +182,9 @@ import { Task } from '../../../../models/task.model';
       }
       table {
         font-size: 14px;
+        width: 100%;
+        overflow-x: auto;
+        display: block;
       }
       .mat-mdc-header-cell {
         padding: 8px;
@@ -195,6 +207,8 @@ import { Task } from '../../../../models/task.model';
       }
       mat-paginator {
         margin-top: 12px;
+        width: 100%;
+        box-sizing: border-box;
       }
     }
   `]
