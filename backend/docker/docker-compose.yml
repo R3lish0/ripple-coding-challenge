@@ -1,0 +1,52 @@
+name: task-management
+
+services:
+  api:
+    container_name: task-management-api
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "5001:5001"
+    volumes:
+      - ../TaskApi:/app
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      - ConnectionStrings__DefaultConnection=Server=db;Database=taskdb;User=taskuser;Password=taskpass;
+    restart: unless-stopped
+    networks:
+      - task-management-network
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: task-management-db
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=taskdb
+      - MYSQL_USER=taskuser
+      - MYSQL_PASSWORD=taskpass
+      - MYSQL_ROOT_PASSWORD=rootpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - task-management-network
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u root -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  task-management-network:
+    external: true
+
+volumes:
+  mariadb_data:
+    name: task-management-mariadb-data

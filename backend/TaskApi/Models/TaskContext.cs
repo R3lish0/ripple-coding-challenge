@@ -9,5 +9,16 @@ public class TaskContext : DbContext
     {
     }
 
-    public DbSet<TaskItem> TaskItems { get; set; } = null!;
+    public DbSet<TaskItem> Tasks { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<TaskItem>()
+            .Property(t => t.Priority)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<TaskItem>()
+            .Property(t => t.Status)
+            .HasConversion<string>();
+    }
 }
